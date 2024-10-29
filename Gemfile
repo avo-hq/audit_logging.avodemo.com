@@ -60,3 +60,5 @@ gem "avo", ">= 3.2.1"
 gem "avo-advanced", ">= 3.2.0", source: "https://packager.dev/avo-hq/"
 
 gem "devise", "~> 4.9"
+
+gem "tailwindcss-rails", "~> 3.0"
