@@ -55,3 +55,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "avo", ">= 3.2.1"
+gem "avo-advanced", ">= 3.2.0", source: "https://packager.dev/avo-hq/"
+
+gem "devise", "~> 4.9"
