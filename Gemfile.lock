@@ -104,6 +104,9 @@ GEM
       tzinfo (~> 2.0, >= 2.0.5)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     avo (3.13.7)
       actionview (>= 6.1)
@@ -226,6 +229,8 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
+    pretender (0.5.0)
+      actionpack (>= 6.1)
     progressbar (1.13.0)
     prop_initializer (0.2.0)
       zeitwerk (>= 2.6.18)
@@ -401,6 +406,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  annotate (~> 3.2)
   avo (>= 3.2.1)
   avo-advanced (>= 3.2.0)!
   bootsnap
@@ -412,6 +418,7 @@ DEPENDENCIES
   faker (~> 3.1, >= 3.1.1)
   importmap-rails
   jbuilder
+  pretender (~> 0.5.0)
   progressbar (~> 1.13)
   puma (>= 5.0)
   rails (~> 7.2.1, >= 7.2.1.1)

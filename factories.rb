@@ -8,4 +8,14 @@ FactoryBot.define do
     password { Faker::Internet.password }
     roles { {admin: false, manager: [true, false].sample, writer: [true, false].sample} }
   end
+
+  factory :product do
+    name { Faker::App.name }
+    description { Faker::Lorem.paragraphs(number: rand(1...3)).join("\n") }
+    price { rand(10000..999000) }
+    category { ::Product.categories.values.sample }
+    quantity { rand(0..200) }
+    manufacturer { Faker::Company.name }
+    is_featured { [true, false].sample }
+  end
 end

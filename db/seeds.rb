@@ -109,3 +109,17 @@ famous_users.reverse_each do |user|
   users.push(FactoryBot.create(:user, **user))
   users_progress_bar.increment
 end
+
+# ---------------------------------- PRODUCTS ---------------------------------- #
+Product.delete_all
+
+products_number = 50
+
+products_progress_bar = ProgressBar.create(
+  progress_params(total: products_number, title: "Creating products")
+)
+
+products_number.times do
+  FactoryBot.create(:product, user: users.sample)
+  products_progress_bar.increment
+end

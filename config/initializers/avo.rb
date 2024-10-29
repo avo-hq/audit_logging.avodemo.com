@@ -22,7 +22,7 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
-  # config.current_user_method = :current_user
+  config.current_user_method = :current_user
   # config.authenticate_with do
   # end
 
@@ -154,7 +154,12 @@ Avo.configure do |config|
   #     all_tools
   #   end
   # }
-  # config.profile_menu = -> {
-  #   link "Profile", path: "/avo/profile", icon: "heroicons/outline/user-circle"
-  # }
+  config.profile_menu = -> {
+    link_to "Stop impersonating", path: Avo::Engine.routes.url_helpers.stop_impersonating_path, icon: "user-circle", method: :post
+    # link "Profile", path: "/avo/profile", icon: "heroicons/outline/user-circle"
+  }
+end
+
+Rails.configuration.to_prepare do
+  Avo::ApplicationController.include UsePretender
 end
