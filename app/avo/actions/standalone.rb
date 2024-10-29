@@ -3,7 +3,7 @@ class Avo::Actions::Standalone < Avo::BaseAction
   self.standalone = true
 
   def handle(**args)
-    info "Standalone action"
+    inform "Standalone action"
     close_modal
   end
 end
