@@ -15,6 +15,8 @@
 #  updated_at   :datetime         not null
 #
 class Product < ApplicationRecord
+  has_paper_trail
+
   enum :category, {
     "Music players": 0,
     "Phones": 1,
