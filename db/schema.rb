@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_29_092847) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_31_074420) do
+  create_table "avo_activities", force: :cascade do |t|
+    t.string "activity_class"
+    t.string "action"
+    t.bigint "author_id"
+    t.string "author_type"
+    t.text "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "avo_activity_pivots", force: :cascade do |t|
+    t.integer "avo_activity_id", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.string "activity_pivot_type"
+    t.integer "activity_pivot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_pivot_type", "activity_pivot_id"], name: "index_avo_activity_pivots_on_activity_pivot"
+    t.index ["avo_activity_id"], name: "index_avo_activity_pivots_on_avo_activity_id"
+    t.index ["record_type", "record_id"], name: "index_avo_activity_pivots_on_record"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name", limit: 255, null: false
     t.text "description", null: false
@@ -40,5 +63,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_29_092847) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "versions", force: :cascade do |t|
+    t.string "whodunnit"
+    t.datetime "created_at"
+    t.bigint "item_id", null: false
+    t.string "item_type", null: false
+    t.string "event", null: false
+    t.text "object", limit: 1073741823
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
+  add_foreign_key "avo_activity_pivots", "avo_activities"
   add_foreign_key "products", "users"
 end

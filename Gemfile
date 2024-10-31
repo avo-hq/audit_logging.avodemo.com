@@ -65,3 +65,7 @@ gem "factory_bot_rails", "~> 6.2"
 gem "faker", "~> 3.1", ">= 3.1.1"
 gem "annotate", "~> 3.2"
 gem "pretender", "~> 0.5.0"
+
+gem "pundit"
+gem "avo-audit_logging", path: "/Users/adrian/work/avocado/gems/avo-audit_logging"
+gem "paper_trail", "~> 15.2"

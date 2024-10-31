@@ -40,7 +40,7 @@ Avo.configure do |config|
   #   search: 'search?',
   # }
   # config.raise_error_on_missing_policy = false
-  config.authorization_client = nil
+  config.authorization_client = :pundit
   config.explicit_authorization = true
 
   ## == Localization ==
@@ -141,19 +141,24 @@ Avo.configure do |config|
   # end
 
   ## == Menus ==
-  # config.main_menu = -> {
-  #   section "Dashboards", icon: "avo/dashboards" do
-  #     all_dashboards
-  #   end
+  config.main_menu = -> {
+    section "Dashboards", icon: "avo/dashboards" do
+      all_dashboards
+    end
 
-  #   section "Resources", icon: "avo/resources" do
-  #     all_resources
-  #   end
+    section "Resources", icon: "avo/resources" do
+      all_resources
+    end
 
-  #   section "Tools", icon: "avo/tools" do
-  #     all_tools
-  #   end
-  # }
+    section "Tools", icon: "avo/tools" do
+      all_tools
+    end
+
+    section "Audit Logging", icon: "presentation-chart-bar" do
+      resource :avo_activity
+    end
+
+  }
   config.profile_menu = -> {
     link_to "Stop impersonating", path: Avo::Engine.routes.url_helpers.stop_impersonating_path, icon: "user-circle", method: :post
     # link "Profile", path: "/avo/profile", icon: "heroicons/outline/user-circle"
@@ -162,4 +167,8 @@ end
 
 Rails.configuration.to_prepare do
   Avo::ApplicationController.include UsePretender
+end
+
+Avo::AuditLogging.configure do |config|
+  config.enabled = true
 end
