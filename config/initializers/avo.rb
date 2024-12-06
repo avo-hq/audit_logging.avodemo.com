@@ -80,12 +80,12 @@ Avo.configure do |config|
   ## provide a lambda to enable or disable cache_resource_filters per user/resource.
   # config.cache_resource_filters = -> { current_user.cache_resource_filters? }
 
-  ## == Turbo options ==
-  # config.turbo = -> do
-  #   {
-  #     instant_click: true
-  #   }
-  # end
+  # == Turbo options ==
+  config.turbo = -> do
+    {
+      instant_click: false
+    }
+  end
 
   ## == Logger ==
   # config.logger = -> {
@@ -141,19 +141,18 @@ Avo.configure do |config|
   # end
 
   ## == Menus ==
-  # config.main_menu = -> {
-  #   section "Dashboards", icon: "avo/dashboards" do
-  #     all_dashboards
-  #   end
+  config.main_menu = -> {
+    section "Resources", icon: "table-cells" do
+      resource :product
+      resource :user
+    end
 
-  #   section "Resources", icon: "avo/resources" do
-  #     all_resources
-  #   end
-
-  #   section "Tools", icon: "avo/tools" do
-  #     all_tools
-  #   end
-  # }
+    # TEST_AVO_AUDIT
+    section "AuditLogging", icon: "presentation-chart-bar" do
+      resource :avo_activity
+    end
+  }
+  
   config.profile_menu = -> {
     link_to "Stop impersonating", path: Avo::Engine.routes.url_helpers.stop_impersonating_path, icon: "user-circle", method: :post
     # link "Profile", path: "/avo/profile", icon: "heroicons/outline/user-circle"
@@ -162,4 +161,9 @@ end
 
 Rails.configuration.to_prepare do
   Avo::ApplicationController.include UsePretender
+end
+
+Avo::AuditLogging.configure do |config|
+  config.enabled = true
+  # config.author_model = "User"
 end
