@@ -65,3 +65,10 @@ gem "factory_bot_rails", "~> 6.2"
 gem "faker", "~> 3.1", ">= 3.1.1"
 gem "annotate", "~> 3.2"
 gem "pretender", "~> 0.5.0"
+
+gem "avo-audit_logging", source: "https://packager.dev/avo-hq/"
+
+
+gem "avo-diff_field", "~> 0.0.5"
+
+gem "paper_trail", "~> 16.0"
