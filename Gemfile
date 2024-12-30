@@ -59,7 +59,7 @@ end
 gem "avo", ">= 3.2.1"
 gem "avo-advanced", ">= 3.2.0", source: "https://packager.dev/avo-hq/"
 gem "devise", "~> 4.9"
-gem "tailwindcss-rails", "~> 3.0"
+gem "tailwindcss-rails", "~> 3.1"
 gem "progressbar", "~> 1.13"
 gem "factory_bot_rails", "~> 6.2"
 gem "faker", "~> 3.1", ">= 3.1.1"
