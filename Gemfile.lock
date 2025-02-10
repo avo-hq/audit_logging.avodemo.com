@@ -6,7 +6,7 @@ GEM
       avo-dynamic_filters (= 3.15.1)
       avo-pro (= 3.15.1)
       zeitwerk (>= 2.6.12)
-    avo-audit_logging (0.0.3)
+    avo-audit_logging (0.0.4)
       avo (>= 3.2.1)
       avo-diff_field (>= 0.0.5)
       zeitwerk (>= 2.6.12)
