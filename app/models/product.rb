@@ -16,16 +16,23 @@
 #
 class Product < ApplicationRecord
   has_paper_trail
-  
+
   enum :category, {
     "Music players": 0,
     "Phones": 1,
     "Computers": 2,
-    "Wearables": 3,
+    "Wearables": 3
   }
 
   belongs_to :user, optional: true
 
   validates_presence_of :quantity
   validates_presence_of :price
+
+  def assign_to(user)
+    self.user = user
+    self.save!
+
+    user.update!(updated_at: Time.current)
+  end
 end
