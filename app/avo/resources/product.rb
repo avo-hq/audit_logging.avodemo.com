@@ -27,5 +27,6 @@ class Avo::Resources::Product < Avo::BaseResource
   def actions
     action Avo::Actions::ChangePrice
     action Avo::Actions::Standalone
+    action Avo::Actions::AssignProduct
   end
 end
