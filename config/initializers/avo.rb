@@ -148,8 +148,10 @@ Avo.configure do |config|
     end
 
     # TEST_AVO_AUDIT
-    section "AuditLogging", icon: "presentation-chart-bar" do
-      resource :avo_activity
+    if Avo::AuditLogging.configuration.enabled?
+      section "AuditLogging", icon: "presentation-chart-bar" do
+        resource :avo_activity
+      end
     end
   }
   

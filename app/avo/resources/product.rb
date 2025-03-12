@@ -16,8 +16,10 @@ class Avo::Resources::Product < Avo::BaseResource
       field :is_featured, as: :boolean
       field :category, as: :select, enum: ::Product.categories
 
-      sidebar do
-        tool Avo::ResourceTools::Timeline
+      if Avo::AuditLogging.configuration.enabled?
+        sidebar do
+          tool Avo::ResourceTools::Timeline
+        end
       end
     end
   end

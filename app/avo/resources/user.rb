@@ -19,14 +19,18 @@ class Avo::Resources::User < Avo::BaseResource
       field :id, as: :id, link_to_record: true
       field :email, as: :text, link_to_record: true
       
-      sidebar do
-        tool Avo::ResourceTools::Timeline
+      if Avo::AuditLogging.configuration.enabled?
+        sidebar do
+          tool Avo::ResourceTools::Timeline
+        end
       end
     end
     
     field :products, as: :has_many
 
-    field :avo_authored, as: :has_many, name: "Activity"
+    if Avo::AuditLogging.configuration.enabled?
+      field :avo_authored, as: :has_many, name: "Activity"
+    end
   end
 
   def filters
