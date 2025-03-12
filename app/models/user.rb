@@ -30,4 +30,6 @@ class User < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
+
+  def is_developer? = true
 end
