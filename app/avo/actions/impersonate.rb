@@ -8,7 +8,7 @@ class Avo::Actions::Impersonate < Avo::BaseAction
       return
     end
 
-    redirect_to Avo::Engine.routes.url_helpers.impersonate_path(user = query.first)
+    redirect_to avo.impersonate_path(user = query.first)
     succeed "#{user.email} is on!"
   end
 end
