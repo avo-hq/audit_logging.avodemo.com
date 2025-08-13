@@ -1,6 +1,6 @@
 class Avo::Resources::Product < Avo::BaseResource
   self.audit_logging = {
-    activity: true
+    activity: -> { params[:skip_activity] != "true" }
   }
 
   self.title = :name
