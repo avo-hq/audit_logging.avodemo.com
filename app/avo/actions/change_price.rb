@@ -6,7 +6,8 @@ class Avo::Actions::ChangePrice < Avo::BaseAction
   }
 
   def fields
-    field :price, as: :number, default: -> { resource.record.price rescue nil }
+    field :price, as: :money, default: -> { resource.record.price rescue nil },
+    currencies: %w[USD]
   end
 
   def handle(query:, fields:, current_user:, resource:, **args)

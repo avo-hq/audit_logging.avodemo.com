@@ -28,7 +28,9 @@ class Product < ApplicationRecord
   belongs_to :user, optional: true
 
   validates_presence_of :quantity
-  validates_presence_of :price
+  validates_presence_of :price_cents
+
+  monetize :price_cents
 
   def assign_to(user)
     self.user = user

@@ -10,7 +10,7 @@ class Avo::Resources::Product < Avo::BaseResource
       field :id, as: :id, link_to_record: true
       field :name, as: :text, link_to_record: true
       field :manufacturer, as: :text
-      field :price, as: :number, step: 1
+      field :price, as: :money, currencies: %w[USD]
       field :quantity, as: :number, step: 1
       field :description, as: :trix
       field :is_featured, as: :boolean

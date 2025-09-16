@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_16_095100) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_16_095300) do
   create_table "avo_audit_logging_activities", force: :cascade do |t|
     t.string "activity_class"
     t.string "action"
@@ -46,6 +46,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_16_095100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "warehouse_id"
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
     t.index ["user_id"], name: "index_products_on_user_id"
     t.index ["warehouse_id"], name: "index_products_on_warehouse_id"
   end
@@ -78,9 +80,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_16_095100) do
 
   create_table "warehouses", force: :cascade do |t|
     t.string "name"
-    t.integer "inventory_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "inventory_value_cents", default: 0, null: false
+    t.string "inventory_value_currency", default: "USD", null: false
   end
 
   add_foreign_key "products", "users"
