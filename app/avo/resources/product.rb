@@ -9,7 +9,7 @@ class Avo::Resources::Product < Avo::BaseResource
     main_panel do
       field :id, as: :id
       field :name, as: :text, filterable: true
-      field :manufacturer, as: :text, filterable: {
+      field :manufacturer, as: :text, sortable: true, filterable: {
         type: :select, options: ::Product.all.pluck(:manufacturer).uniq
       }
       field :price, as: :money, currencies: %w[USD]
