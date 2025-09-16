@@ -144,7 +144,7 @@ Avo.configure do |config|
   config.main_menu = -> {
     section "Resources", icon: "table-cells" do
       resource :product
-      resource :inventory
+      resource :warehouse
       resource :user
     end
 
