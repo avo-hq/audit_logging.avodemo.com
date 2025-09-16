@@ -113,6 +113,26 @@ end
 # ---------------------------------- PRODUCTS ---------------------------------- #
 Product.delete_all
 
+# -------------------------------- INVENTORIES --------------------------------- #
+Inventory.delete_all
+
+inventories_names = [
+  "North Warehouse",
+  "South Warehouse",
+  "East Depot",
+  "West Depot",
+  "Central Hub"
+]
+
+inventories_progress_bar = ProgressBar.create(
+  progress_params(total: inventories_names.size, title: "Creating inventories")
+)
+
+inventories = inventories_names.map do |name|
+  Inventory.create!(name: name, total_value: 0)
+  inventories_progress_bar.increment
+end
+
 products_number = 50
 
 products_progress_bar = ProgressBar.create(
@@ -120,6 +140,9 @@ products_progress_bar = ProgressBar.create(
 )
 
 products_number.times do
-  FactoryBot.create(:product, user: users.sample)
+  FactoryBot.create(:product, user: users.sample, inventory: inventories.sample)
   products_progress_bar.increment
 end
+
+# Recalculate inventory totals after product creation
+inventories.each(&:recalc_total!)
