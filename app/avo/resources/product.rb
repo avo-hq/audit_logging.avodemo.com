@@ -7,9 +7,11 @@ class Avo::Resources::Product < Avo::BaseResource
 
   def fields
     main_panel do
-      field :id, as: :id, link_to_record: true
-      field :name, as: :text, link_to_record: true
-      field :manufacturer, as: :text
+      field :id, as: :id
+      field :name, as: :text, filterable: true
+      field :manufacturer, as: :text, filterable: {
+        type: :select, options: ::Product.all.pluck(:manufacturer).uniq
+      }
       field :price, as: :money, currencies: %w[USD]
       field :quantity, as: :number, step: 1
       field :description, as: :trix
