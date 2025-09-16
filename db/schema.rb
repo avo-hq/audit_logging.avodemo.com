@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_06_104117) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_16_094614) do
   create_table "avo_audit_logging_activities", force: :cascade do |t|
     t.string "activity_class"
     t.string "action"
@@ -34,6 +34,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_104117) do
     t.index ["record_type", "record_id"], name: "index_avo_audit_logging_activity_pivots_on_record"
   end
 
+  create_table "inventories", force: :cascade do |t|
+    t.string "name"
+    t.integer "total_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name", limit: 255, null: false
     t.text "description", null: false
@@ -45,6 +52,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_104117) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "inventory_id"
+    t.index ["inventory_id"], name: "index_products_on_inventory_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -74,5 +83,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_104117) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "products", "inventories"
   add_foreign_key "products", "users"
 end

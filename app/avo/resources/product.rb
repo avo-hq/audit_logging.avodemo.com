@@ -15,6 +15,7 @@ class Avo::Resources::Product < Avo::BaseResource
       field :description, as: :trix
       field :is_featured, as: :boolean
       field :category, as: :select, enum: ::Product.categories
+      field :inventory, as: :belongs_to
 
       if Avo::AuditLogging.configuration.enabled?
         sidebar do
