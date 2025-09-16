@@ -129,17 +129,69 @@ warehouses_progress_bar = ProgressBar.create(
 )
 
 warehouses = warehouses_names.map do |name|
-  Warehouse.create!(name: name, inventory_value: 0)
+  Warehouse.create!(name: name, inventory_value_cents: 0)
 end
 
-products_number = 50
+curated_products = [
+  # Apple
+  {name: "iPhone 15", price_usd: 799.00, manufacturer: "Apple", category: "Phones"},
+  {name: "iPhone 15 Pro Max", price_usd: 1199.00, manufacturer: "Apple", category: "Phones"},
+  {name: "MacBook Air 13-inch (M3)", price_usd: 1099.00, manufacturer: "Apple", category: "Computers"},
+  {name: "MacBook Pro 14-inch (M3 Pro)", price_usd: 1999.00, manufacturer: "Apple", category: "Computers"},
+  {name: "iPad Air (M2)", price_usd: 599.00, manufacturer: "Apple", category: "Computers"},
+  {name: "iPad Pro 11-inch (M4)", price_usd: 999.00, manufacturer: "Apple", category: "Computers"},
+  {name: "Apple Watch Series 10", price_usd: 399.00, manufacturer: "Apple", category: "Wearables"},
+  {name: "Apple Watch Ultra 2", price_usd: 799.00, manufacturer: "Apple", category: "Wearables"},
+  {name: "AirPods Pro (2nd generation)", price_usd: 249.00, manufacturer: "Apple", category: "Music players"},
+  {name: "AirPods Max", price_usd: 549.00, manufacturer: "Apple", category: "Music players"},
+  {name: "Apple TV 4K (128GB)", price_usd: 149.00, manufacturer: "Apple", category: "Computers"},
+
+  # Samsung
+  {name: "Samsung Galaxy S24", price_usd: 799.99, manufacturer: "Samsung", category: "Phones"},
+  {name: "Samsung Galaxy S24 Ultra", price_usd: 1299.99, manufacturer: "Samsung", category: "Phones"},
+  {name: "Galaxy Watch6", price_usd: 299.99, manufacturer: "Samsung", category: "Wearables"},
+  {name: "Galaxy Buds2 Pro", price_usd: 229.99, manufacturer: "Samsung", category: "Music players"},
+
+  # Google
+  {name: "Google Pixel 9", price_usd: 799.00, manufacturer: "Google", category: "Phones"},
+  {name: "Pixel Watch 3", price_usd: 349.99, manufacturer: "Google", category: "Wearables"},
+
+  # Sony
+  {name: "Sony WH-1000XM5", price_usd: 399.99, manufacturer: "Sony", category: "Music players"},
+
+  # Bose
+  {name: "Bose QuietComfort Ultra Headphones", price_usd: 429.00, manufacturer: "Bose", category: "Music players"},
+
+  # Microsoft
+  {name: "Surface Laptop 7", price_usd: 1299.00, manufacturer: "Microsoft", category: "Computers"},
+
+  # Dell / HP / Lenovo
+  {name: "Dell XPS 13", price_usd: 1099.00, manufacturer: "Dell", category: "Computers"},
+  {name: "HP Spectre x360 14", price_usd: 1299.99, manufacturer: "HP", category: "Computers"},
+  {name: "Lenovo ThinkPad X1 Carbon", price_usd: 1499.00, manufacturer: "Lenovo", category: "Computers"}
+]
+
+# Bias towards Apple by duplicating their entries, then shuffle for mix
+apple_products = curated_products.select { |p| p[:manufacturer] == "Apple" }
+other_products = curated_products.reject { |p| p[:manufacturer] == "Apple" }
+weighted_products = (apple_products * 2) + other_products
+weighted_products.shuffle!
 
 products_progress_bar = ProgressBar.create(
-  progress_params(total: products_number, title: "Creating products")
+  progress_params(total: weighted_products.size, title: "Creating products")
 )
 
-products_number.times do
-  FactoryBot.create(:product, user: users.sample, warehouse: warehouses.sample)
+weighted_products.each do |data|
+  Product.create!(
+    name: data[:name],
+    description: "#{data[:manufacturer]} #{data[:name]} in the #{data[:category]} category.",
+    price_cents: ((data[:price_usd].to_f * 100).round),
+    category: data[:category],
+    quantity: rand(5..50),
+    manufacturer: data[:manufacturer],
+    user: users.sample,
+    warehouse: warehouses.sample
+  )
   products_progress_bar.increment
 end
 

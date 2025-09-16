@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_16_095300) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_16_100500) do
   create_table "avo_audit_logging_activities", force: :cascade do |t|
     t.string "activity_class"
     t.string "action"
@@ -37,7 +37,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_16_095300) do
   create_table "products", force: :cascade do |t|
     t.string "name", limit: 255, null: false
     t.text "description", null: false
-    t.integer "price", null: false
     t.integer "quantity", null: false
     t.string "manufacturer", null: false
     t.integer "category", null: false
