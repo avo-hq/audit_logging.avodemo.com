@@ -1,4 +1,6 @@
 # This controller has been generated to enable Rails' resource routes.
 # More information on https://docs.avohq.io/3.0/controllers.html
-class Avo::InventoriesController < Avo::ResourcesController
+class Avo::WarehousesController < Avo::ResourcesController
 end
+
+

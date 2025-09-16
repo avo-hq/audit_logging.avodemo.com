@@ -24,7 +24,7 @@ class Product < ApplicationRecord
     "Wearables": 3
   }
 
-  belongs_to :inventory, optional: true
+  belongs_to :warehouse, optional: true
   belongs_to :user, optional: true
 
   validates_presence_of :quantity
@@ -37,9 +37,9 @@ class Product < ApplicationRecord
     user.update!(updated_at: Time.current)
   end
 
-  after_update_commit :update_inventory_value
+  after_update_commit :update_warehouse_value
 
-  def update_inventory_value
-    inventory&.recalc_total!
+  def update_warehouse_value
+    warehouse&.recalc_total!
   end
 end
