@@ -12,7 +12,8 @@ FactoryBot.define do
   factory :product do
     name { Faker::App.name }
     description { Faker::Lorem.paragraphs(number: rand(1...3)).join("\n") }
-    price { rand(10..2000) }
+    price_cents { rand(1000..200000) }
+    price_currency { 'USD' }
     category { ::Product.categories.values.sample }
     quantity { rand(1..30) }
     manufacturer { Faker::Company.name }

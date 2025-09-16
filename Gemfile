@@ -69,3 +69,7 @@ gem "pretender", "~> 0.5.0"
 gem "avo-audit_logging", source: "https://packager.dev/avo-hq/"
 
 gem "paper_trail", "~> 16.0"
+
+# Money field and monetization
+gem "avo-money_field"
+gem "money-rails", "~> 1.12"
